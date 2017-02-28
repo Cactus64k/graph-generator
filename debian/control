@@ -1,0 +1,13 @@
+Source: graph-generator
+Section: httpd
+Priority: optional
+Maintainer: Cactus <medved_cool@mail.ru>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.5
+Homepage: <https://github.com/Cactus64k/graph-generator>
+
+Package: graph-generator
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: fastcgi application for generate graphs
+	

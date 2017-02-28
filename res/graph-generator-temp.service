@@ -1,0 +1,10 @@
+[Unit]
+Description=Graph generator for temperature statistics
+JoinsNamespaceOf=/sys/class/thermal/thermal_zone0/temp
+
+[Service]
+ExecStart=/bin/bash -c "graph-generator --file=/sys/class/thermal/thermal_zone0/temp --socket=127.0.0.1:9000"
+ExecReload=/bin/kill -s HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target

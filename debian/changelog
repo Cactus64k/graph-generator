@@ -1,0 +1,5 @@
+graph-generator (1.0.0-1) unstable; urgency=low
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Cactus <medved_cool@mail.ru>  Sat, 28 Jan 2017 14:03:10 +0300

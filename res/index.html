@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Machine statistics</title>
+		<meta charset="utf-8">
+		<style>
+			body	{
+						background-color: #EFEFEF;
+					}
+
+			h1		{
+						color: gray;
+						text-align: center;
+						margin: 0%;
+						margin-top: 3%;
+						margin-bottom: 3%;
+					}
+
+			.header	{
+						color: gray;
+						text-align: center;
+						width: 100%;
+						display: block;
+						font-size: 17pt;
+					}
+
+			img		{
+						display: block;
+						width: 45%;
+						position: absolute;
+					}
+
+			#temp	{
+						float: right;
+						width: 45%;
+					}
+
+			#cpu	{
+						width: 45%;
+					}
+		</style>
+	</head>
+	<body>
+		<!--h1>24 hours machine statistics</h1!-->
+		<div id="temp">
+			<div class="header">Temperature</div>
+			<img alt="no grid" src="grid.svg">
+			<img alt="no temp graph" src="graph_temp.svg">
+		</div>
+		<div id="cpu">
+			<div class="header">CPU</div>
+			<img alt="no grid" src="grid.svg">
+			<img alt="no cpu graph" src="graph_cpu.svg">
+		</div>
+		
+	</body>
+</html>
+

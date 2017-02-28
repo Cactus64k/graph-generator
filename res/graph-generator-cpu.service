@@ -1,0 +1,10 @@
+[Unit]
+Description=Graph generator for cpu statistics
+JoinsNamespaceOf=/proc/loadavg
+
+[Service]
+ExecStart=/bin/bash -c "graph-generator --file=/proc/loadavg --socket=127.0.0.1:9001 --multiplier=25"
+ExecReload=/bin/kill -s HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target
