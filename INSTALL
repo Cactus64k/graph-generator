@@ -27,30 +27,19 @@ server {
 DEBIAN:
 ################################################
 $ cd ~/
-$ git clone https://github.com/Cactus64k/simple-fb2-reader.git
-# apt-get install debhelper libxml2-dev libgtk-3-dev libzip-dev pkg-config gettext libsqlite3-dev cmake
-$ cd simple-fb2-reader
+$ git clone https://github.com/Cactus64k/graph-generator.git
+# apt-get install debhelper libfcgi-dev cmake
+$ cd graph-generator
 $ dpkg-buildpackage
 $ cd ..
-# dpkg -i simple-fb2-reader_*.deb
+# dpkg -i graph-generator_*.deb
 
-ARCHLINUX
-################################################
-https://aur.archlinux.org/packages/simple-fb2-reader
-
-SLACKWARE
-################################################
-Use ./slackbuild
-
-FEDORA
-################################################
-https://copr.fedoraproject.org/coprs/dexpl/simple-fb2-reader/
 
 ANOTHER SYSTEMS:
 ################################################
 $ cd ~/
-$ git clone https://github.com/Cactus64k/simple-fb2-reader.git
-$ cd simple-fb2-reader
+$ git clone https://github.com/Cactus64k/graph-generator.git
+$ cd graph-generator
 $ cmake CMakeLists.txt
 $ make
 $ make install
