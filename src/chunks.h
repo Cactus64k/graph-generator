@@ -2,9 +2,12 @@
 #ifndef CHUNKS_H_
 	#define CHUNKS_H_
 
+	#define _POSIX_SOURCE
+
 	#include <stdlib.h>
 	#include <stdio.h>
 	#include <stdint.h>
+	#include <math.h>
 	#include <string.h>
 	#include <assert.h>
 	#include <stddef.h>
@@ -18,6 +21,8 @@
 	#include <unistd.h>
 	#include <sys/stat.h>
 	#include <fcntl.h>
+	#include <sys/time.h>
+	#include <sys/types.h>
 
 	extern char* SOCKET;
 	extern int THREAD_COUNT;
@@ -25,9 +30,8 @@
 	extern double OFFSET;
 	extern double MULTIPLIER;
 	extern int SLEEP;
-	extern bool FILL;
 
-	#define GRAPH_PERIOD 6*60
+	#define DAYSEC (24*60*60)
 
 	void* out_thread(void* ptr);
 	void* harv_thread(void* ptr);
@@ -44,7 +48,6 @@
 		size_t sleep;
 		double multiplier;
 		double offset;
-		bool fill;
 
 		double* data;
 		size_t count;

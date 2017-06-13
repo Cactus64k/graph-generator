@@ -1,43 +1,50 @@
 #include "chunks.h"
 
-size_t get_day_pos(size_t period)
-{
-
-	time_t t = time(NULL);
-
-	struct tm* ts = localtime(&t);
-
-	time_t sec		= (ts->tm_hour)*60*60 + (ts->tm_min)*60 + ts->tm_sec;
-	size_t pos		= sec/period;
-
-	return pos;
-}
-
 void* harv_thread(void* ptr)
 {
-	APP* app		= (APP*) ptr;
+	APP* app		= (APP*)ptr;
+	int period	= DAYSEC / app->count;
 
 	while(1)
 	{
-		size_t pos		= get_day_pos(GRAPH_PERIOD);
-		FILE* f			= fopen(app->file_path, "rb");
+		int fd	= open(app->file_path, O_RDONLY);
+		FILE* f	= fdopen(fd, "rb");
+
 		if(f != NULL)
 		{
-			double value	= 0;
+			fd_set rfds;
+			int timeout		= period - time(NULL)%period;
+			struct timeval tv	= {.tv_sec = timeout, .tv_usec = 0};
+			FD_ZERO(&rfds);
+			FD_SET(fd, &rfds);
 
-			if(fscanf(f, "%lf", &value) == 1)
+			double value = 0;
+
+			if(	(select(fd+1, &rfds, NULL, NULL, &tv) != -1)
+				&&
+				(fscanf(f, "%lf", &value) == 1))
 			{
-				value = value * app->multiplier;
-				if(app->data[pos] != 0)
-					app->data[pos] = (app->data[pos] + value)/2;
-				else
+				size_t pos		= (time(NULL) % DAYSEC)/period;
+				value			= value * app->multiplier;
+
+				if(isnan(app->data[pos]) || app->data[pos] == 0)
 					app->data[pos] = value;
+				else
+					app->data[pos] = (app->data[pos] + value)/2;
+
+				if(pos+1 < app->count)
+					app->data[pos+1]	= NAN;
+			}
+			else
+			{
+				size_t pos		= (time(NULL) % DAYSEC)/period;
+				app->data[pos]	= NAN;
 			}
 
 			fclose(f);
 		}
 
-		sleep(app->sleep);
+		sleep(2);
 	}
 	return NULL;
 }

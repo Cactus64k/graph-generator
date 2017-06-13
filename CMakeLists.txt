@@ -33,10 +33,14 @@ add_executable (${PROJECT} ${HEADERS} ${SOURCES})
 target_link_libraries (${PROJECT} ${LIBRARIES})
 
 
-#INSTALL
+#INSTALL 
 
 install (TARGETS ${PROJECT} RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 install (FILES res/graph-generator-cpu.service DESTINATION /${CMAKE_INSTALL_SYSCONFDIR}/systemd/system/)
 install (FILES res/graph-generator-temp.service DESTINATION /${CMAKE_INSTALL_SYSCONFDIR}/systemd/system/)
+install (FILES res/graph-generator-ds18b20.service DESTINATION /${CMAKE_INSTALL_SYSCONFDIR}/systemd/system/)
+install (FILES res/statistics.conf DESTINATION /${CMAKE_INSTALL_SYSCONFDIR}/nginx/sites-available/)
 install (FILES res/index.html DESTINATION /${CMAKE_INSTALL_LOCALSTATEDIR}/www/statistics/)
-install (FILES res/grid.svg DESTINATION /${CMAKE_INSTALL_LOCALSTATEDIR}/www/statistics/)
+install (FILES res/grid_100.svg DESTINATION /${CMAKE_INSTALL_LOCALSTATEDIR}/www/statistics/)
+install (FILES res/grid_temp.svg DESTINATION /${CMAKE_INSTALL_LOCALSTATEDIR}/www/statistics/)
+install (FILES res/favicon.png DESTINATION /${CMAKE_INSTALL_LOCALSTATEDIR}/www/statistics/)

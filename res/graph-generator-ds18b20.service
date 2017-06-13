@@ -1,0 +1,10 @@
+[Unit]
+Description=Graph generator for ds18b20 statistics
+JoinsNamespaceOf=/dev/ttyS3
+
+[Service]
+ExecStart=/bin/bash -c "graph-generator --file=/dev/ttyS3 --socket=127.0.0.1:9002 --offset=50"
+ExecReload=/bin/kill -s HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target

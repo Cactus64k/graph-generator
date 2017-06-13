@@ -3,10 +3,9 @@
 char* SOCKET			= "127.0.0.1:9000";
 int THREAD_COUNT		= 2;
 char* FILE_PATH			= NULL;
-double OFFSET			= 0;
+double OFFSET			= 0.f;
 double MULTIPLIER		= 1.f;
-int SLEEP				= 30;
-bool FILL				= true;
+int SLEEP				= 10;
 
 int parse_opt(int key, char* arg, struct argp_state* state)
 {
@@ -85,20 +84,6 @@ int parse_opt(int key, char* arg, struct argp_state* state)
 			if(sscanf(arg, "%d", &SLEEP) != 1)
 			{
 				fprintf(stderr, "\nERROR: Failed to parse sleep %s\n", arg);
-				exit(EXIT_FAILURE);
-			}
-
-			break;
-		}
-		case 'c':
-		{
-			if(strcmp("true", arg) == 0)
-				FILL = true;
-			else if(strcmp("false", arg) == 0)
-				FILL = false;
-			else
-			{
-				fprintf(stderr, "\nERROR: Failed to parse fill %s\n", arg);
 				exit(EXIT_FAILURE);
 			}
 

@@ -2,7 +2,7 @@
 
 void* out_thread(void* ptr)
 {
-	APP* app						= (APP*) ptr;
+	APP* app							= (APP*) ptr;
 	pthread_mutex_t* accept_mutex	= &(app->accept_mutex);
 
 	FCGX_Request request;
@@ -14,7 +14,7 @@ void* out_thread(void* ptr)
 	}
 
 	intmax_t buff_size	= 4096;
-	char* buff			= malloc(buff_size);
+	char* buff		= malloc(buff_size);
 
 	while(1)
 	{
@@ -36,6 +36,8 @@ void* out_thread(void* ptr)
 
 		FCGX_Finish_r(&request);
 	}
+
+	free(buff);
 
 	return NULL;
 }

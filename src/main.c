@@ -7,21 +7,16 @@ int main(int argc, char **argv)
 
 	static struct argp_option options[] = {
 	{"socket" ,				's',	"127.0.0.1:9000",	0,	"Socket addres with port",			0},
-	{"threads" ,			't',	"4",				0,	"Count of using outputs threads",	0},
-	{"file" ,				'f',	"/file/path",		0,	"File with graph paramethers",		0},
+	{"threads" ,				't',	"2",				0,	"Count of using outputs threads",	0},
+	{"file" ,					'f',	"/file/path",		0,	"File with graph paramethers",		0},
 	{"offset" ,				'o',	"0",				0,	"Graph offset in pixels",			0},
-	{"multiplier" ,			'm',	"1",				0,	"Multiplier for file paramether",	0},
-	{"sleep" ,				'p',	"30",				0,	"Harvester thread sleep time",		0},
-	{"fill" ,				'c',	"true",				0,	"Fill svg graph",					0},
+	{"multiplier" ,			'm',	"1",				0,	"Multiplier for file paramether",		0},
+	{"sleep" ,				'p',	"10",			0,	"Harvester thread sleep time",		0},
 	{0}};
 
-	struct argp argp = {0};
-	argp.options	= options;
+	struct argp argp	= {0};
+	argp.options		= options;
 	argp.parser		= parse_opt;
-//	argp.doc		=	"Machine list format:"
-//						"\n\nlogin:password@hostname\n"
-//						"login2:password2@hostname2\n\n"
-//						"Or login@hostname if you have public key authorisation. Each machine on a new line. Offline machines handled in main thread.";
 
 	argp_parse (&argp, argc, argv, 0, 0, NULL);
 
@@ -33,13 +28,17 @@ int main(int argc, char **argv)
 
 	APP app;
 	app.socket		= -1;
-	app.count		= 60/6*24;
+	app.count		= 10*24;		// 10 px per hour
 	app.offset		= OFFSET;
 	app.multiplier	= MULTIPLIER;
-	app.file_path	= FILE_PATH;
+	app.file_path		= FILE_PATH;
 	app.sleep		= SLEEP;
-	app.fill		= FILL;
-	app.data		= calloc(app.count, sizeof(double));
+	app.data			= malloc(app.count * sizeof(double));
+
+	for(size_t i=0;i<app.count; i++)
+	{
+		app.data[i] = NAN;
+	}
 
 	pthread_mutex_init(&(app.accept_mutex), NULL);
 

@@ -3,6 +3,7 @@
 	<head>
 		<title>Machine statistics</title>
 		<meta charset="utf-8">
+		<link rel="shortcut icon" href="favicon.png" type="image/png">
 		<style>
 			body	{
 						background-color: #EFEFEF;
@@ -31,26 +32,39 @@
 					}
 
 			#temp	{
-						float: right;
+						display:inline-block;
 						width: 45%;
 					}
 
 			#cpu	{
+						display:inline-block;
+						width: 45%;
+					}
+
+			#ds18b20{
+						display:inline-block;
+						margin-top: 25%;
 						width: 45%;
 					}
 		</style>
 	</head>
 	<body>
-		<!--h1>24 hours machine statistics</h1!-->
 		<div id="temp">
-			<div class="header">Temperature</div>
-			<img alt="no grid" src="grid.svg">
+			<div class="header">CPU temperature</div>
+			<img alt="no grid" src="grid_100.svg">
 			<img alt="no temp graph" src="graph_temp.svg">
 		</div>
+
 		<div id="cpu">
-			<div class="header">CPU</div>
-			<img alt="no grid" src="grid.svg">
+			<div class="header">CPU load</div>
+			<img alt="no grid" src="grid_100.svg">
 			<img alt="no cpu graph" src="graph_cpu.svg">
+		</div>
+		
+		<div id="ds18b20">
+			<div class="header">DS18B20</div>
+			<img alt="no grid" src="grid_temp.svg">
+			<img alt="no cpu graph" src="graph_ds18b20.svg">
 		</div>
 		
 	</body>
